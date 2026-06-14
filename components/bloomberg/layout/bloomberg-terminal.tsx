@@ -7,13 +7,11 @@ import {
 } from "../atoms";
 import { BloombergHeader } from "../core/bloomberg-header";
 import { BloombergSidebar } from "../core/bloomberg-sidebar";
-import {
-  MarketView,
-  MarketMoversView,
-  NewsView,
-  RmiView,
-  VolatilityView,
-} from "../views";
+import { MarketView } from "../views/market-view";
+import { MarketMoversView } from "../views/market-movers-view";
+import { NewsView } from "../views/news-view";
+import { RmiView } from "../views/rmi-view";
+import { VolatilityView } from "../views/volatility-view";
 import { bloombergColors } from "../lib/theme-config";
 
 export function BloombergTerminal() {
@@ -25,6 +23,7 @@ export function BloombergTerminal() {
     switch (currentView) {
       case "market":
         return <MarketView isDarkMode={isDarkMode} />;
+      
       case "movers":
         return (
           <MarketMoversView
@@ -39,6 +38,7 @@ export function BloombergTerminal() {
             isLoading={false}
           />
         );
+      
       case "volatility":
         return (
           <VolatilityView
@@ -53,8 +53,10 @@ export function BloombergTerminal() {
             isLoading={false}
           />
         );
+      
       case "rmi":
         return <RmiView />;
+      
       case "news":
         return (
           <NewsView
@@ -62,6 +64,7 @@ export function BloombergTerminal() {
             onBack={() => setCurrentView("market")}
           />
         );
+      
       default:
         return <MarketView isDarkMode={isDarkMode} />;
     }
@@ -88,7 +91,6 @@ export function BloombergTerminal() {
 
         {/* Main Content Area */}
         <div className="flex-1 flex flex-col overflow-hidden">
-          {/* Main View Content */}
           <div className="flex-1 overflow-auto p-2">
             {renderCurrentView()}
           </div>
